@@ -1,14 +1,7 @@
-flask
+cflask
 werkzeug
 numpy
 pandas
-cv2
+opencv
 keras
 PIL
-csv
-pickle
-base64
-io
-uuid
-os
-

@@ -3,3 +3,4 @@ werkzeug
 numpy
 pandas
 keras
+gunicorn

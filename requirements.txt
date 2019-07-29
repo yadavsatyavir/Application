@@ -2,7 +2,6 @@ cflask
 werkzeug
 numpy
 pandas
-opencv
 keras
 PIL
 csv

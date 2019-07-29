@@ -5,3 +5,5 @@ pandas
 opencv
 keras
 PIL
+csv
+pickle

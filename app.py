@@ -1,19 +1,9 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Jul 29 21:57:41 2019
-
-@author: sayadav
-"""
-
 from flask import Flask
-
 app = Flask(__name__)
 
 @app.route('/')
-def hello_world():
-    return "Hello world"
+def homepage():
+    return "<h1>Hello heroku</h1><p>It is currently </p>"
 
 if __name__ == '__main__':
-    app.run()
-#    port = int(os.environ.get('PORT', 8000))
-#    app.run(host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0',port=80)

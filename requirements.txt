@@ -3,6 +3,4 @@ werkzeug
 numpy
 pandas
 keras
-PIL
-csv
 pickle

@@ -1,5 +1,2 @@
 flask
 werkzeug
-numpy
-pandas
-keras

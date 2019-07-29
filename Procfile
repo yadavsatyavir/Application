@@ -1,2 +1,1 @@
-web: gunicorn -b :$PORT app:app
-ps:scale web=1
+web: gunicorn app:app

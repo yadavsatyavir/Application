@@ -4,4 +4,3 @@ werkzeug
 numpy
 pandas
 keras
-opencv 4.1.0

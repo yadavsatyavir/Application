@@ -1,4 +1,3 @@
-python
 flask
 werkzeug
 numpy

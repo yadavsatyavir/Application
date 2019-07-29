@@ -1,0 +1,14 @@
+flask
+werkzeug
+numpy
+pandas
+re
+base64
+io
+uuid
+os
+cv2
+keras
+PIL
+csv
+pickle

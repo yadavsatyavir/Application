@@ -1,6 +1,7 @@
-cflask
+python 3.7.4
+flask
 werkzeug
 numpy
 pandas
 keras
-pickle
+opencv 4.1.0

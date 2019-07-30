@@ -2,7 +2,7 @@ Flask
 gunicorn
 pandas
 numpy
-keras
+Keras
 werkzeug
 opencv-python
 python-csv

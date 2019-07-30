@@ -4,6 +4,9 @@ pandas
 numpy
 keras
 werkzeug
-opencv
+opencv-python
 csv
 PIL
+pickle
+mtcnn
+sklearn

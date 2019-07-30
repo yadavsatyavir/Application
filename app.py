@@ -3,6 +3,7 @@ from werkzeug import secure_filename
 import numpy as np
 import pandas as pd
 from mtcnn.mtcnn import MTCNN
+from keras.models import load_model
 
 app = Flask(__name__)
 

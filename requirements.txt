@@ -10,3 +10,7 @@ Pillow-PIL
 pickle5
 mtcnn
 sklearn
+uuid0
+os-win
+pybase64
+re101

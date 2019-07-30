@@ -2,8 +2,8 @@ from flask import Flask, request, render_template
 from werkzeug import secure_filename
 import numpy as np
 import pandas as pd
-from keras.preprocessing import image
 
+import re, base64, io, uuid, os, cv2
 
 app = Flask(__name__)
 

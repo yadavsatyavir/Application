@@ -5,8 +5,8 @@ numpy
 keras
 werkzeug
 opencv-python
-csv
-PIL
-pickle
+python-csv
+Pillow-PIL
+pickle5
 mtcnn
 sklearn

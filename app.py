@@ -1,0 +1,25 @@
+from flask import Flask, render_template
+from flask import Flask, request, render_template
+from werkzeug import secure_filename
+import numpy as np
+import pandas as pd
+import re, base64, io, uuid, os, cv2
+from keras.preprocessing import image
+from PIL import Image
+from keras.models import load_model
+from keras import backend as K
+from flask import jsonify
+import FaceNet_satya_util as satya
+import csv
+
+app = Flask(__name__)
+
+@app.route('/')
+def hello_world():
+    return render_template(
+            "./home.html"  # name of template
+            )
+
+if __name__ == '__main__':
+    app.run(debug=True)
+    #app.run(host='0.0.0.0',port=80)

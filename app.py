@@ -2,6 +2,7 @@ from flask import Flask, request, render_template
 from werkzeug import secure_filename
 import numpy as np
 import pandas as pd
+from mtcnn.mtcnn import MTCNN
 
 app = Flask(__name__)
 

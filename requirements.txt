@@ -5,5 +5,5 @@ numpy
 keras
 werkzeug
 opencv
-import csv
+csv
 PIL

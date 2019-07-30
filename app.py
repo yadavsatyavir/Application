@@ -3,7 +3,6 @@ from werkzeug import secure_filename
 import numpy as np
 import pandas as pd
 from keras.preprocessing import image
-from PIL import Image
 
 
 app = Flask(__name__)

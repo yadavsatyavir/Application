@@ -3,8 +3,6 @@ from werkzeug import secure_filename
 import numpy as np
 import pandas as pd
 
-import re, base64, io, uuid, os, cv2
-
 app = Flask(__name__)
 
 @app.route('/')

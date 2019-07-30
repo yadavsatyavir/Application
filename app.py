@@ -1,16 +1,8 @@
-from flask import Flask, render_template
 from flask import Flask, request, render_template
 from werkzeug import secure_filename
 import numpy as np
 import pandas as pd
-import re, base64, io, uuid, os, cv2
-from keras.preprocessing import image
-from PIL import Image
-from keras.models import load_model
-from keras import backend as K
-from flask import jsonify
-import FaceNet_satya_util as satya
-import csv
+
 
 app = Flask(__name__)
 

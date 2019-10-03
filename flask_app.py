@@ -10,6 +10,9 @@ from keras import backend as K
 from flask import jsonify
 import FaceNet_satya_util as satya
 import csv
+import nlp_util as nlp_satya
+from keras.preprocessing.text import Tokenizer
+import nlp_prediction_functios as nlp_predict
 
 app = Flask(__name__)
 APP_ROOT = os.path.dirname(os.path.realpath(__file__))
@@ -53,9 +56,31 @@ def face_extractor():
 def face_recognizer():
     return render_template(
             "./face_recognizer.html"  # name of template
-            )    
+            )
     
-  
+@app.route('/nlp_sentiment_movie_review')
+def nlp_sentiment_movie_review():
+    return render_template(
+            "./nlp_sentiment_movie_review.html"  # name of template
+            )
+@app.route('/nlp_news_classification_01')
+def nlp_news_classification_01():
+    return render_template(
+            "./nlp_news_classification_01.html"  # name of template
+            )
+
+@app.route('/nlp_next_word_prediction_01')
+def nlp_next_word_prediction_01():
+    return render_template(
+            "./nlp_next_word_prediction_01.html"  # name of template
+            )
+    
+@app.route('/nlp_english_to_french')
+def nlp_english_to_french():
+    return render_template(
+            "./nlp_english_to_french.html"  # name of template
+            )
+    
 @app.route('/predict_image', methods=['GET','POST'])
 def predict_image():
     file = request.files['file']
@@ -235,7 +260,6 @@ def recognize_single_faces():
     
     return jsonify(facelist), 200
 
-
 @app.route('/upload_new_faces/<name>', methods=['GET','POST'])
 def upload_new_faces(name):
     destination = os.path.join(APP_ROOT,"images")
@@ -270,9 +294,65 @@ def add_person_name_with_encodding(personName, newface, datafile):
         writer = csv.writer(writeFile)
         writer.writerows(newface.tolist())
         writeFile.close()
+
+############## NLP CODE START HERE ##########################
+@app.route('/nlp_check_sentiment_movie_review/<text>', methods=['GET','POST'])
+def nlp_check_sentiment_movie_review(text):
+    text = request.form['inputText']
     
+    import urllib.parse
+    text = urllib.parse.unquote_plus(text)
+    reviews_test = []
+    reviews_test.append(text)
+    reviews_test = nlp_satya.CleanAndRemoveHtmlAndOtherSpacialChars(reviews_test)
+    reviews_test = nlp_satya.NTLK_remove_stop_words(reviews_test)
+    reviews_test = nlp_satya.NTLK_get_stemmed_text(reviews_test)
+    reviews_test = nlp_satya.NTLK_get_lemmatized_text(reviews_test)
+    
+    #load pretrained model
+    model = nlp_satya.pickle_LoadModal(os.path.join(APP_ROOT, "models", "Movie_Review.h5"))
+    ngram_vectorizer = nlp_satya.pickle_LoadModal(os.path.join(APP_ROOT, "models", "Movie_Review_ngram_vectorizer.h5"))
+    reviews_test = ngram_vectorizer.transform(reviews_test)
+    prediction = model.predict(reviews_test)
+    K.clear_session()
+    return str(prediction[0]), 200
 
+@app.route('/nlp_predict_news_classification_01', methods=['GET','POST'])
+def nlp_predict_news_classification_01():
+    text = request.form['inputText']
+    
+    import urllib.parse
+    text = urllib.parse.unquote_plus(text)
+    model_input = []
+    model_input.append(text)
+        
+    #load pretrained model
+    model = load_model(os.path.join(APP_ROOT, "models", "model_news_classification_01.h5"))
+    tokenizer  = Tokenizer()
+    tokenizer = nlp_satya.pickle_LoadModal(os.path.join(APP_ROOT,"models","tokenizer_news_classification_01.pickle"))
+    model_input = tokenizer.texts_to_matrix(model_input, mode='tfidf')
+    prediction = model.predict(model_input)
+    K.clear_session()
+    return str(np.argmax(prediction)), 200
+#    return 'ok',200
+    
+@app.route('/nlp_predict_next_word_01', methods=['GET','POST'])
+def nlp_predict_next_word_01():
+    text = request.form['inputText']
+    result = nlp_predict.nlp_predict_next_word_01(APP_ROOT, text)
+    return result, 200
 
+@app.route('/nlp_convert_english_to_french', methods=['GET','POST'])
+def nlp_convert_english_to_french():
+    text = request.form['inputText']
+    modelName = request.form['modelName']
+    import nlp_english_to_french as convertor
+    result = ''
+    if (modelName == 'eng-fra'):
+        result = convertor.convert_english_to_french(APP_ROOT, text)
+    else:
+        result = convertor.convert_english_to_hindi(APP_ROOT, text)
+    return result, 200
+    
 if __name__ == '__main__':
-    app.run(debug=True)
-    #app.run(host='0.0.0.0',port=80)
+    app.run(host='0.0.0.0',port=80)
